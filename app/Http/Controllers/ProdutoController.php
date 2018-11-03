@@ -9,30 +9,20 @@ class ProdutoController extends Controller
 {
     public function listaProdutos()
     {
-		$produtos = [
-			[
-				'id' => 1,
-				'nome' => 'Arroz',
-				'descricao' => 'Arroz Tio João',
-				'preco' => 5.00,
-				'quantidade' => 5,
-			],
-			[
-				'id' => 2,
-				'nome' => 'Feijão',
-				'descricao' => 'Feijão Tio João',
-				'preco' => 1.00,
-				'quantidade' => 6,
-			],
-		];
+		$produtos = Produto::all();
 		return view('produtos.lista-produtos', [
 			'produtos' => $produtos,
 		]);
     }
 
-    public function form()
+    public function formCriar()
     {
-    	return view('produtos.form');
+    	$produto = new Produto;
+    	$acao = 'criar';
+    	return view('produtos.form', [
+    		'produto' => $produto,
+    		'acao' => $acao,
+    	]);
     }
 
     public function criar(Request $request)
@@ -45,5 +35,27 @@ class ProdutoController extends Controller
     	$produto->save();
 
     	return redirect('/produtos');
+    }
+
+    public function formEditar($id)
+    {
+    	$produto = Produto::find($id);
+    	$acao = 'atualizar';
+    	return view('produtos.form', [
+    		'produto' => $produto,
+    		'acao' => $acao,
+    	]);
+    }
+
+    public function atualizar(Request $request)
+    {
+    	$produto = Produto::find($request->id);
+    	$produto->nome = $request->nome;
+    	$produto->descricao = $request->descricao;
+    	$produto->preco = $request->preco;
+    	$produto->quantidade = $request->quantidade;
+    	$produto->save();
+
+    	return redirect('/produtos'); 	
     }
 }

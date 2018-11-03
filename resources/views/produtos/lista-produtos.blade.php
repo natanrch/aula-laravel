@@ -15,20 +15,20 @@
 	<tbody>
 		@foreach($produtos as $produto)
 		<tr>
-			<td>{{$produto['id']}}</td>
-			<td>{{$produto['nome']}}</td>
-			<td>{{$produto['descricao']}}</td>
+			<td>{{$produto->id}}</td>
+			<td>{{$produto->nome}}</td>
+			<td>{{$produto->descricao}}</td>
 			<td
-				@if($produto['preco'] < 2)
+				@if($produto->preco < 2)
 					style="background-color: red"
 				@else
 					style="background-color: green"
 				@endif
 			>
-				{{$produto['preco']}}
+				{{$produto->preco}}
 			</td>
-			<td>{{$produto['quantidade']}}</td>
-			<td><a href="#">Editar</a></td>
+			<td>{{$produto->quantidade}}</td>
+			<td><a href="/produtos/editar/{{$produto->id}}">Editar</a></td>
 			<td><a href="#">Deletar</a></td>
 		</tr>
 		@endforeach

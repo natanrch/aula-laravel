@@ -23,6 +23,7 @@ Route::get('/alunos/{nome}/{sobrenome}', function ($nome, $sobrenome) {
 });
 
 Route::get('/produtos', 'ProdutoController@listaProdutos');
-Route::get('/produtos/form', 'ProdutoController@form');
+Route::get('/produtos/form', 'ProdutoController@formCriar');
+Route::get('/produtos/editar/{id}', 'ProdutoController@formEditar');
 Route::post('/produtos/criar', 'ProdutoController@criar');
-Route::post('/produtos/editar/{id}', 'ProdutoController@editar');
+Route::post('/produtos/atualizar', 'ProdutoController@atualizar');
