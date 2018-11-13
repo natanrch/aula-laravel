@@ -22,11 +22,11 @@ Route::get('/alunos/{nome}/{sobrenome}', function ($nome, $sobrenome) {
 	echo $nome." ".$sobrenome;
 });
 
-// Route::get('/produtos', 'ProdutoController@listaProdutos');
-Route::get('/produtos', function() {
-	$produtos = \App\Produto::all();
-	return view('produtos.lista-produtos', ['produtos' => $produtos]);
-});
+Route::get('/produtos', 'ProdutoController@listaProdutos');
+// Route::get('/produtos', function() {
+// 	$produtos = \App\Produto::all();
+// 	return view('produtos.lista-produtos', ['produtos' => $produtos]);
+// });
 Route::get('/produtos/form', 'ProdutoController@formCriar');
 Route::get('/produtos/editar/{id}', 'ProdutoController@formEditar');
 Route::post('/produtos/criar', 'ProdutoController@criar');

@@ -1,7 +1,19 @@
 @extends('layout')
 
 @section('conteudo-principal')
-<a href="/produtos/form">Criar novo produto</a>
+<div>
+	<a href="/produtos/form">Criar novo produto</a>
+</div>
+<div>
+	<form action="" method="GET">
+		<input type="text" name="busca" value="{{$busca}}">
+		<button type="submit">Pesquisar</button>
+	</form>
+</div>
+@if($busca)
+<a href="/produtos">Limpar busca</a>
+@endif
+@if(count($produtos))
 <table>
 	<thead>
 		<tr>
@@ -34,4 +46,7 @@
 		@endforeach
 	</tbody>
 </table>
+@else
+<h3 class="alert-danger">Não foi localizado produtos com o filtro: {{$busca}}</h3>
+@endif
 @stop

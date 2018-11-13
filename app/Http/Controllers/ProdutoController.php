@@ -7,11 +7,18 @@ use App\Produto;
 
 class ProdutoController extends Controller
 {
-    public function listaProdutos()
-    {
-		$produtos = Produto::all();
+    public function listaProdutos(Request $request)
+    {   
+        $busca = $request->get('busca');
+        if ($request->has('busca')) {
+            $produtos = Produto::where('nome', 'like', "%{$busca}%")->get();
+        } else {
+            $produtos = Produto::all();  
+        }
+
 		return view('produtos.lista-produtos', [
-			'produtos' => $produtos,
+            'produtos' => $produtos,
+			'busca' => $busca,
 		]);
     }
 
@@ -40,6 +47,7 @@ class ProdutoController extends Controller
     public function formEditar($id)
     {
     	$produto = Produto::find($id);
+        return dd($produto);
     	$acao = 'atualizar';
     	return view('produtos.form', [
     		'produto' => $produto,
